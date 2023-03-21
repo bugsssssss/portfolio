@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body class="">
+<div id="site-border-left"></div>
+<div id="site-border-right"></div>
+<div id="site-border-top"></div>
+<div id="site-border-bottom"></div>
+<!-- Add your content of header -->
+<header>
+  <nav class="navbar  navbar-fixed-top navbar-default">
+    <div class="container">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav ">
+          <li><a href="{% url 'home' %}" title="">01 : Home</a></li>
+          <li><a href="{% url 'about' %}" title="">03 : About me</a></li>
+          <li><a href="{% url 'works' %}" title="">02 : Works</a></li>
+          <li><a href="{% url 'contact' %}" title="">04 : Contact</a></li>
+        </ul>
+
+
+          <ul class="nav navbar-nav navbar-right navbar-small visible-md visible-lg">
+            {% for i in all_works %}
+            <li><a href="{% url 'work-detail' i.pk %}" title="" class="active">00{{i.id}}</a></li>
+            {% endfor %}
+            {% comment %} <li><a href="./index.html" title="" class="active">001</a></li>
+            <li><a href="./index.html" title="">002</a></li>
+            <li><a href="./index.html" title="">003</a></li>
+            <li><a href="./index.html" title="">004</a></li>
+            <li><a href="./index.html" title="">005</a></li>
+            <li><a href="./index.html" title="">006</a></li> {% endcomment %}
+          </ul>
+
+
+      </div> 
+    </div>
+  </nav>
+</header>
+<div class="section-container">
+  <div class="container">
+ 
+    <div class="row">
+      <div class="col-xs-12" >
+        <div style='background: url("{{work.backround.url}}"); height: 543px; background-repeat: no-repeat; background-size: cover; background-position: center;'>
+          
+          {% comment %} <img src="{{work.backround.url}}" class="img-responsive" alt=""> {% endcomment %}
+        </div>
+        <div class="card-container">
+          <div class="text-center">
+            <h1 class="h2">00{{work.id}} : {{work.title}}</h1>
+          </div>
+          <p>{{work.description}}</p>
+          {% if work.quote %}
+          <blockquote>
+            <p>{{work.quote}}</p>
+            <small class="pull-right">{{work.author}}</small>
+          </blockquote>
+          {% endif %}
+        </div>
+
+      
+      </div>
+
+      
+      <div class="col-md-8 col-md-offset-2 section-container-spacer">
+        <div class="row">
+
+          <div class="col-xs-12 col-md-6">
+            <img src="{{work.picture1.url}}" class="img-responsive" alt="">
+            {% comment %} <p>Menphis skyline</p> {% endcomment %}
+          </div>
+          <div class="col-xs-12 col-md-6">
+            <img src="{{work.picture2.url}}" class="img-responsive" alt="">
+            {% comment %} <p>Menphis skyline</p> {% endcomment %}
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12" style='background: url("{{work.cover.url}}"); height:543px; background-repeat: no-repeat; background-size: cover; background-position: center;'>
+        {% comment %} <img src="{{work.cover.url}}" class="img-responsive" alt=""> {% endcomment %}
+
+      </div>
+      <a href="{{work.url}}" class="btn btn-primary btn-lg" style='margin-top: 15px;'>Go to the website</a>
+
+    </div>
+  </div>
+</div>
+
+
+<footer class="footer-container text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p>© All rights are not reserved :)</p>
+      </div>
+    </div>
+  </div>
+</footer>
+{% endblock content %}
