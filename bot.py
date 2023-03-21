@@ -7,7 +7,7 @@ django.setup()
 from telebot import types
 from main.models import Callback
 
-TOKEN = '6070792020:AAGVTNvP1pwlRavBmV1-QXF3vxLUkK9YC68'
+
 
 bot = telebot.TeleBot(token=TOKEN)
 
