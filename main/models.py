@@ -23,6 +23,7 @@ class Callback(models.Model):
     email = models.EmailField(("email"), max_length=254)
     topic = models.CharField(("topic"), max_length=100)
     text = models.TextField(("text"))
+    created = models.DateTimeField(("created"), auto_now_add=True)
 
     class Meta:
         verbose_name = ("Callback")
@@ -43,7 +44,7 @@ class Projects(models.Model):
     picture1 = models.ImageField(("picture1"), upload_to='projects/photo')
     picture2 = models.ImageField(("picture2"), upload_to='projects/photo')
     cover = models.ImageField(("cover"), upload_to='projects/cover')
-    url = models.CharField(("url"), max_length=100)
+    url = models.CharField(("url"), max_length=100, blank=True)
 
     class Meta:
         verbose_name = ("Projects")
@@ -51,3 +52,34 @@ class Projects(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class BotUsers(models.Model):
+
+    user_id = models.IntegerField(("user_id"))
+    username = models.CharField(("username"), max_length=100)
+    created = models.DateTimeField(("created"), auto_now_add=True)
+
+    class Meta:
+        verbose_name = ("BotUsers")
+        verbose_name_plural = ("BotUsers")
+
+    def __str__(self):
+        return self.username
+
+
+class ProjectsDecription(models.Model):
+
+    text = models.TextField(("text"))
+
+    class Meta:
+        verbose_name = ("ProjectsDecription")
+        verbose_name_plural = ("ProjectsDecriptions")
+
+    def __str__(self):
+        return self.text
+
+    # def get_absolute_url(self):
+    #     return reverse("ProjectsDecription_detail", kwargs={"pk": self.pk})
+
+

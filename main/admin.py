@@ -16,3 +16,15 @@ class CallbackAdmin(admin.ModelAdmin):
 @admin.register(Projects)
 class ProjectsAdmin(admin.ModelAdmin):
     list_display = ['id', 'title']
+
+
+@admin.register(BotUsers)
+class BotUsersAdmin(admin.ModelAdmin):
+    list_display = ['user_id', 'username']
+
+
+@admin.register(ProjectsDecription)
+class ProjectsDecriptionAdmin(admin.ModelAdmin):
+    list_display = ['text']
+
+
