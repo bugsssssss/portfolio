@@ -8,7 +8,7 @@ class CallbackForm(forms.ModelForm):
     topic = forms.CharField(widget=forms.TextInput(
         attrs={'class': 'form-control', 'placeholder': 'Subject'}))
     text = forms.CharField(widget=forms.Textarea(
-        attrs={'class': 'form-control', 'placeholder': 'Enter your message', 'rows': 5}))
+        attrs={'class': 'form-control', 'placeholder': 'Enter your message', 'rows': 5, 'resize': 'none'}))
 
     class Meta:
         model = Callback

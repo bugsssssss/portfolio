@@ -1,11 +1,15 @@
+import json
+from telebot import types
 import telebot
-import os 
+import os
 import django
 import datetime
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.settings')
 django.setup()
-from telebot import types
-from main.models import Callback
+
+
+# with open('token.json', 'wb') as file:
+#     file.write(json.loads('6070792020:AAGVTNvP1pwlRavBmV1-QXF3vxLUkK9YC68'))
 
 TOKEN = '6070792020:AAGVTNvP1pwlRavBmV1-QXF3vxLUkK9YC68'
 
@@ -13,14 +17,28 @@ bot = telebot.TeleBot(token=TOKEN)
 
 my_chat_id = 657061394
 all_buttons = ['All callbacks 🧐']
+from main.models import Callback, BotUsers
 
 name = 'Nurbek'
+
 
 @bot.message_handler(commands=['start'])
 def start(message):
     global my_chat_id, all_buttons
+    user = None
 
-    admin = False 
+    try:
+        user = BotUsers.objects.get(user_id=message.chat.id)
+    except:
+        pass
+    if user is None:
+        user = BotUsers(user_id=message.chat.id,
+                        username=message.from_user.username)
+        user.save()
+    else:
+        pass
+
+    admin = False
     response = ''
     if message.chat.id == my_chat_id:
         admin = True
@@ -35,11 +53,10 @@ def start(message):
         bot.send_message(message.chat.id, response)
 
 
-
 @bot.message_handler(content_types=['text'])
 def text_handler(message):
     global all_buttons
-    admin = False 
+    admin = False
     response = ''
     if message.chat.id == my_chat_id:
         admin = True
@@ -48,7 +65,6 @@ def text_handler(message):
         callbacks = Callback.objects.all()
         if len(callbacks) != 0:
             for i in callbacks:
-
                 response += f'''
 Callback #{i.id}
 
@@ -56,16 +72,13 @@ email: {i.email}
 topic: {i.topic}
 text: {i.text}
 -----------------------
-            
     '''
         else:
             response = f'No callbacks yet'
-    else: 
+    else:
         response = 'Sorry, seems you are not Nurbek :)'
-    
 
     bot.send_message(message.chat.id, response)
-
 
 
 bot.infinity_polling()

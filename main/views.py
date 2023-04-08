@@ -4,12 +4,11 @@ from .forms import *
 from django.urls import reverse_lazy
 
 
-
 # Create your views here.
 data = {
     'phone': '+998 99 428 77 96',
     'email': 'n.soatov@bk.ru',
-    'address': 'Tashkent'
+    'address': 'Tashkent',
 }
 
 
@@ -22,9 +21,9 @@ def home(request):
 
 def works(request):
     projects = Projects.objects.all()
-    print(projects)
     context = {
-        'projects': projects
+        'projects': projects,
+        'text': ProjectsDecription.objects.get(id=1)
     }
     return render(request, 'works.html', context=context)
 
