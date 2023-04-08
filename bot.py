@@ -11,7 +11,7 @@ django.setup()
 # with open('token.json', 'wb') as file:
 #     file.write(json.loads('6070792020:AAGVTNvP1pwlRavBmV1-QXF3vxLUkK9YC68'))
 
-TOKEN = '6070792020:AAGVTNvP1pwlRavBmV1-QXF3vxLUkK9YC68'
+
 
 bot = telebot.TeleBot(token=TOKEN)
 
