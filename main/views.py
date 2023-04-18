@@ -2,7 +2,8 @@ from django.shortcuts import redirect, render
 from .models import *
 from .forms import *
 from django.urls import reverse_lazy
-
+from bot import bot, my_chat_id
+from datetime import datetime
 
 # Create your views here.
 data = {
@@ -50,6 +51,16 @@ def contact(request):
         form = CallbackForm(request.POST)
         if form.is_valid():
             form.save()
+            bot.send_message(my_chat_id, f'''
+New callback from: <b>{form.cleaned_data['name']}</b>
+
+Email: {form.cleaned_data['email']}
+
+Topic: {form.cleaned_data['topic']}
+
+Text: {form.cleaned_data['text']}
+
+Time: {datetime.today().strftime('%D %H:%M:%S')}''', parse_mode='HTML')
             return redirect('home')
     context = {
         'form': form,

@@ -20,6 +20,7 @@ class About(models.Model):
 
 class Callback(models.Model):
 
+    name = models.CharField(("name"), max_length=100)
     email = models.EmailField(("email"), max_length=254)
     topic = models.CharField(("topic"), max_length=100)
     text = models.TextField(("text"))
