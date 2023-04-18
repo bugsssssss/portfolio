@@ -67,3 +67,4 @@ Time: {datetime.today().strftime('%D %H:%M:%S')}''', parse_mode='HTML')
         'data': data
     }
     return render(request, 'contact.html', context=context)
+
