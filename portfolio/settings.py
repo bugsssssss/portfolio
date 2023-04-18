@@ -2,13 +2,14 @@ from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+import pickle
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-o!u+9anuexezi*t&+5f$6h8=dxlij@s%sh)^3^0^1x-g2txif*'
+with open('secret_key.json', 'rb') as file:
+    SECRET_KEY = pickle.load(file)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -94,7 +95,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Tashkent'
 
 USE_I18N = True
 

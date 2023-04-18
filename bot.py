@@ -6,16 +6,22 @@ import django
 import datetime
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'portfolio.settings')
 django.setup()
+import pickle 
+my_chat_id = 657061394
 
 
 # with open('token.json', 'wb') as file:
 #     file.write(json.loads('6070792020:AAGVTNvP1pwlRavBmV1-QXF3vxLUkK9YC68'))
 
 
+with open ('token.json', 'rb') as file:
+    TOKEN = pickle.load(file)
+
 
 bot = telebot.TeleBot(token=TOKEN)
 
-my_chat_id = 657061394
+
+
 all_buttons = ['All callbacks 🧐']
 from main.models import Callback, BotUsers
 
@@ -81,4 +87,4 @@ text: {i.text}
     bot.send_message(message.chat.id, response)
 
 
-bot.infinity_polling()
+# bot.infinity_polling()
